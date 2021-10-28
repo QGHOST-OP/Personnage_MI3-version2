@@ -11,6 +11,9 @@ public class DeplacementPersonnage : MonoBehaviour
     private CharacterController characterController;
 
     [SerializeField]
+    private Camera mainCamera;
+
+    [SerializeField]
     private float vitesseMarche = 6f;
     [SerializeField]
     private float vitesseCourse = 12f;
@@ -68,9 +71,16 @@ public class DeplacementPersonnage : MonoBehaviour
         }
 
 
-        Vector3 move = transform.right * x + transform.forward * y;
+        Vector3 move = mainCamera.transform.right * x + mainCamera.transform.forward * y;
 
         characterController.Move(move * vitesseDeplacement * Time.deltaTime);
+
+        if (move.magnitude <= 0.1f)
+        {
+            float targetAngle = Mathf.Atan2(move.x, move.y) * Mathf.Rad2Deg;
+            Quaternion rotation = Quaternion.Euler(0f, targetAngle, 0f);
+            transform.rotation = Quaternion.Lerp(transform.rotation, rotation, 1 * Time.deltaTime);
+        }
     }
 
     // Le personnage va continuellement tomber.

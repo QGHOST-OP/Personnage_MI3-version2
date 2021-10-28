@@ -24,6 +24,7 @@ public class GestionnairePeripherique : MonoBehaviour
 
     public UnityEvent sauter;
     public UnityEvent cliquer;
+    public UnityEvent changementCamera;
 
 
     private void Awake()
@@ -44,7 +45,10 @@ public class GestionnairePeripherique : MonoBehaviour
 
         peripheriqueEntree.JoueurAuSol.Cliquer.started += LireClic;
 
+        peripheriqueEntree.JoueurAuSol.ChangementCamera.started += LireChangementCamera;
+
     }
+
     private void OnEnable()
     {
         peripheriqueEntree.JoueurAuSol.Enable();
@@ -83,6 +87,11 @@ public class GestionnairePeripherique : MonoBehaviour
 
         mouvementDeplacementHorizontal = deplacement.x;
         mouvementDeplacementVertical = deplacement.y;
+    }
+
+    private void LireChangementCamera(InputAction.CallbackContext context)
+    {
+        changementCamera.Invoke();
     }
 
 }

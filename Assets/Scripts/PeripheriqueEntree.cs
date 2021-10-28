@@ -57,6 +57,14 @@ public class @PeripheriqueEntree : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""ChangementCamera"",
+                    ""type"": ""Button"",
+                    ""id"": ""ce3426f8-13ea-4868-be87-5d07fb7236bc"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -268,6 +276,17 @@ public class @PeripheriqueEntree : IInputActionCollection, IDisposable
                     ""action"": ""Courrir"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""514a9aa2-1e54-41c0-8329-5a8a30d557a7"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ChangementCamera"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -335,6 +354,7 @@ public class @PeripheriqueEntree : IInputActionCollection, IDisposable
         m_JoueurAuSol_Regarder = m_JoueurAuSol.FindAction("Regarder", throwIfNotFound: true);
         m_JoueurAuSol_Cliquer = m_JoueurAuSol.FindAction("Cliquer", throwIfNotFound: true);
         m_JoueurAuSol_Courrir = m_JoueurAuSol.FindAction("Courrir", throwIfNotFound: true);
+        m_JoueurAuSol_ChangementCamera = m_JoueurAuSol.FindAction("ChangementCamera", throwIfNotFound: true);
         // JoueuDansEau
         m_JoueuDansEau = asset.FindActionMap("JoueuDansEau", throwIfNotFound: true);
         m_JoueuDansEau_Newaction = m_JoueuDansEau.FindAction("New action", throwIfNotFound: true);
@@ -395,6 +415,7 @@ public class @PeripheriqueEntree : IInputActionCollection, IDisposable
     private readonly InputAction m_JoueurAuSol_Regarder;
     private readonly InputAction m_JoueurAuSol_Cliquer;
     private readonly InputAction m_JoueurAuSol_Courrir;
+    private readonly InputAction m_JoueurAuSol_ChangementCamera;
     public struct JoueurAuSolActions
     {
         private @PeripheriqueEntree m_Wrapper;
@@ -404,6 +425,7 @@ public class @PeripheriqueEntree : IInputActionCollection, IDisposable
         public InputAction @Regarder => m_Wrapper.m_JoueurAuSol_Regarder;
         public InputAction @Cliquer => m_Wrapper.m_JoueurAuSol_Cliquer;
         public InputAction @Courrir => m_Wrapper.m_JoueurAuSol_Courrir;
+        public InputAction @ChangementCamera => m_Wrapper.m_JoueurAuSol_ChangementCamera;
         public InputActionMap Get() { return m_Wrapper.m_JoueurAuSol; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -428,6 +450,9 @@ public class @PeripheriqueEntree : IInputActionCollection, IDisposable
                 @Courrir.started -= m_Wrapper.m_JoueurAuSolActionsCallbackInterface.OnCourrir;
                 @Courrir.performed -= m_Wrapper.m_JoueurAuSolActionsCallbackInterface.OnCourrir;
                 @Courrir.canceled -= m_Wrapper.m_JoueurAuSolActionsCallbackInterface.OnCourrir;
+                @ChangementCamera.started -= m_Wrapper.m_JoueurAuSolActionsCallbackInterface.OnChangementCamera;
+                @ChangementCamera.performed -= m_Wrapper.m_JoueurAuSolActionsCallbackInterface.OnChangementCamera;
+                @ChangementCamera.canceled -= m_Wrapper.m_JoueurAuSolActionsCallbackInterface.OnChangementCamera;
             }
             m_Wrapper.m_JoueurAuSolActionsCallbackInterface = instance;
             if (instance != null)
@@ -447,6 +472,9 @@ public class @PeripheriqueEntree : IInputActionCollection, IDisposable
                 @Courrir.started += instance.OnCourrir;
                 @Courrir.performed += instance.OnCourrir;
                 @Courrir.canceled += instance.OnCourrir;
+                @ChangementCamera.started += instance.OnChangementCamera;
+                @ChangementCamera.performed += instance.OnChangementCamera;
+                @ChangementCamera.canceled += instance.OnChangementCamera;
             }
         }
     }
@@ -524,6 +552,7 @@ public class @PeripheriqueEntree : IInputActionCollection, IDisposable
         void OnRegarder(InputAction.CallbackContext context);
         void OnCliquer(InputAction.CallbackContext context);
         void OnCourrir(InputAction.CallbackContext context);
+        void OnChangementCamera(InputAction.CallbackContext context);
     }
     public interface IJoueuDansEauActions
     {
