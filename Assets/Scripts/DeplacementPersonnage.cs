@@ -8,10 +8,14 @@ public class DeplacementPersonnage : MonoBehaviour
     [SerializeField]
     private GestionnairePeripherique gestionnairePeripherique;
     [SerializeField]
+    private GestionnaireCamera gestionnaireCamera;
+    [SerializeField]
     private CharacterController characterController;
 
     [SerializeField]
     private Camera mainCamera;
+    [SerializeField]
+    private Animator animatorPersonnage;
 
     [SerializeField]
     private float vitesseMarche = 6f;
@@ -75,12 +79,32 @@ public class DeplacementPersonnage : MonoBehaviour
 
         characterController.Move(move * vitesseDeplacement * Time.deltaTime);
 
-        if (move.magnitude <= 0.1f)
+        if (gestionnaireCamera.cameraFPSActive) // Si première personne
         {
-            float targetAngle = Mathf.Atan2(move.x, move.y) * Mathf.Rad2Deg;
-            Quaternion rotation = Quaternion.Euler(0f, targetAngle, 0f);
-            transform.rotation = Quaternion.Lerp(transform.rotation, rotation, 1 * Time.deltaTime);
+            //Rotation du joueur a la première personne selon la rotation de la caméra
+            transform.eulerAngles = new Vector3(transform.eulerAngles.x, mainCamera.transform.eulerAngles.y, transform.eulerAngles.z); 
         }
+        else
+        {
+            if (move.magnitude <= 0.1f) //Si le personnage bouge ou avance
+            {
+                float targetAngle = Mathf.Atan2(move.x, move.y) * Mathf.Rad2Deg;
+                Quaternion rotation = Quaternion.Euler(0f, targetAngle, 0f);
+                transform.rotation = Quaternion.Lerp(transform.rotation, rotation, 1 * Time.deltaTime);
+            }
+        }
+
+        if (move != Vector3.zero) //Si personnage bouge
+        {
+            animatorPersonnage.SetBool("Marche", true);
+        }
+        else 
+        {
+            animatorPersonnage.SetBool("Marche", false);
+        }
+
+
+
     }
 
     // Le personnage va continuellement tomber.
@@ -99,6 +123,7 @@ public class DeplacementPersonnage : MonoBehaviour
         if (toucheSol)
         {
             vitesseVertical.y = Mathf.Sqrt(hauteurSaut * -3.0f * gravite);
+            animatorPersonnage.SetTrigger("Saut");
         }
     }
 
