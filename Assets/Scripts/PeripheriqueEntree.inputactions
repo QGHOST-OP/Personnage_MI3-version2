@@ -38,7 +38,7 @@
                     "interactions": ""
                 },
                 {
-                    "name": "Courrir",
+                    "name": "Courir",
                     "type": "Button",
                     "id": "4ef5014f-4637-421c-8bc2-b873ee508c71",
                     "expectedControlType": "Button",
@@ -178,17 +178,6 @@
                 },
                 {
                     "name": "",
-                    "id": "d2f6b216-2751-4983-b6bb-bf2581cdd193",
-                    "path": "<Gamepad>/buttonSouth",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Sauter",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "f244b637-973e-42a1-b800-c592e2e57327",
                     "path": "<Keyboard>/space",
                     "interactions": "",
@@ -256,11 +245,11 @@
                 {
                     "name": "",
                     "id": "19f676a6-2187-4a98-b2ca-c73cbe129b82",
-                    "path": "<Keyboard>/q",
+                    "path": "<Keyboard>/shift",
                     "interactions": "Press(behavior=2)",
                     "processors": "",
                     "groups": "",
-                    "action": "Courrir",
+                    "action": "Courir",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

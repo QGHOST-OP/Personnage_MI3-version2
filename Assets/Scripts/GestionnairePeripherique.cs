@@ -40,8 +40,8 @@ public class GestionnairePeripherique : MonoBehaviour
 
         peripheriqueEntree.JoueurAuSol.Sauter.started += LireSaut;
 
-        peripheriqueEntree.JoueurAuSol.Courrir.started += LireCourrir;
-        peripheriqueEntree.JoueurAuSol.Courrir.canceled += LireCourrir;
+        peripheriqueEntree.JoueurAuSol.Courir.started += LireCourrir;
+        peripheriqueEntree.JoueurAuSol.Courir.canceled += LireCourrir;
 
         peripheriqueEntree.JoueurAuSol.Cliquer.started += LireClic;
 

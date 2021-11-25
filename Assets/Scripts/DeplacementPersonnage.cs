@@ -72,17 +72,23 @@ public class DeplacementPersonnage : MonoBehaviour
         if (gestionnairePeripherique.courrirActif)
         {
             vitesseDeplacement = vitesseCourse;
+            animatorPersonnage.SetBool("Courir", true);
+        }
+        else
+        {
+            animatorPersonnage.SetBool("Courir", false);
         }
 
 
         Vector3 move = mainCamera.transform.right * x + mainCamera.transform.forward * y;
+        move.y = 0;
 
         characterController.Move(move * vitesseDeplacement * Time.deltaTime);
 
         if (gestionnaireCamera.cameraFPSActive) // Si première personne
         {
             //Rotation du joueur a la première personne selon la rotation de la caméra
-            transform.eulerAngles = new Vector3(transform.eulerAngles.x, mainCamera.transform.eulerAngles.y, transform.eulerAngles.z); 
+            transform.eulerAngles = new Vector3(transform.eulerAngles.x, mainCamera.transform.eulerAngles.y, transform.eulerAngles.z);
         }
         else
         {
@@ -98,7 +104,7 @@ public class DeplacementPersonnage : MonoBehaviour
         {
             animatorPersonnage.SetBool("Marche", true);
         }
-        else 
+        else
         {
             animatorPersonnage.SetBool("Marche", false);
         }
